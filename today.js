@@ -1,39 +1,6 @@
-
-function setdate(x){
-  var index = x.parentNode.parentNode.rowIndex;
-  var dataRow = document.getElementsByClassName('hold');
-  console.log(dataRow[index])
-  // var breakline1 = document.createElement("br");
-  // // var breakline2 = document.createElement("br");
-  // var holddiv = document.getElementsByClassName("hold");
-  //
-  //   console.log(holddiv[0]);
-
-  //
-  // var template = document.getElementById('job');
-  var taskDate = document.createElement("input");
-  var taskDateType = document.createAttribute("type");
-  taskDateType.value = "date";
-  taskDate.setAttributeNode(taskDateType)
-  dataRow[index].appendChild(taskDate);
-  var dateSet = document.getElementsByClassName('setDate');
-  dateSet[index].disabled = true
-  // template.appendChild(holddiv);
-  // holddiv.appendChild(breakline1);
-  // holddiv.appendChild(breakline2);
-
-}
-
-
-
-
 function addToday(){
 var template = document.getElementById('dataTable');
-
-
-
   var dataRow = document.createElement("tr");
-
   var holddiv = document.createElement("div");
   var holder = document.createAttribute("class");
   holder.value = "hold"
@@ -61,37 +28,42 @@ var template = document.getElementById('dataTable');
   var status = document.createElement("input");
   var statusType = document.createAttribute("type");
   statusType.value="radio";
+  var doneClick = document.createAttribute("onclick");
+  doneClick.value = "removeData(this)"
+  status.setAttributeNode(doneClick)
   status.setAttributeNode(statusType);
 
-// create buttons:start
-  var doneButton = document.createElement("button");
-  var doneText = document.createTextNode("Done");
-  doneButton.appendChild(doneText);
-  var doneClass = document.createAttribute("class");
-  doneClass.value = "done";
-  doneButton.setAttributeNode(doneClass)
-  var doneClick = document.createAttribute("onclick");
-  doneClick.value = "add(this)"
-  doneButton.setAttributeNode(doneClick);
 
-  var setDateButton = document.createElement("button");
-  var setDateText = document.createTextNode("Set Date");
-  setDateButton.appendChild(setDateText);
-  var dateClass = document.createAttribute("class");
-  dateClass.value = "setDate";
-  setDateButton.setAttributeNode(dateClass)
-  var dateClick = document.createAttribute("onclick");
-  dateClick.value = "setdate(this)"
-  setDateButton.setAttributeNode(dateClick);
+  var   removeButton = document.createElement("button");
+  var removeText = document.createTextNode("Remove");
+  removeButton.appendChild(removeText);
+  var removeClass = document.createAttribute("class");
+  removeClass.value = "remove";
+  removeButton.setAttributeNode(removeClass)
+  var removeClick = document.createAttribute("onclick");
+  removeClick.value = "remove(this)"
+  removeButton.setAttributeNode(removeClick);
+
+// create buttons:start
+
+
+  var setTimeButton = document.createElement("button");
+  var setTimeText = document.createTextNode("Set Time");
+  setTimeButton.appendChild(setTimeText);
+  var timeClass = document.createAttribute("class");
+  timeClass.value = "setime";
+  setTimeButton.setAttributeNode(timeClass)
+  var timeClick = document.createAttribute("onclick");
+  timeClick.value = "setTime(this)"
+  setTimeButton.setAttributeNode(timeClick);
 
   // console.log(doneButton)
 // create buttons:end
 
   holddiv.appendChild(status)
+  holddiv.appendChild(removeButton)
   holddiv.appendChild(task)
-  holddiv.appendChild(doneButton)
-  holddiv.appendChild(setDateButton)
-
+  holddiv.appendChild(setTimeButton)
   template.appendChild(dataRow)
 
 
@@ -100,9 +72,84 @@ var template = document.getElementById('dataTable');
 }
 
 function add(t){
-  var index = t.parentNode.parentNode.rowIndex;
-  var doneButton = document.getElementsByClassName("done");
-  doneButton[index].disabled=true
+  var saveButton = document.getElementsByClassName("save");
+  var taskInput = document.getElementsByClassName('workTask')
 
-  // task[index].disabled=true
+  for (var i = 0; i < taskInput.length; i++) {
+       localStorage.setItem(i,taskInput[i].value)
+  }
+
+
+
+}
+function removeData(t){
+  var index = t.parentNode.parentNode.rowIndex;
+}
+
+
+
+
+function setTime(x){
+  var index = x.parentNode.parentNode.rowIndex;
+  var hourSpan = document.createElement("span");
+  var hourText = document.createTextNode(":");
+  hourSpan.appendChild(hourText)
+
+  var minutesSpan = document.createElement("span");
+  var minutesText = document.createTextNode(":");
+  minutesSpan.appendChild(minutesText)
+
+  var secondsSpan = document.createElement("span");
+  var secondsText = document.createTextNode(":");
+  secondsSpan.appendChild(secondsText)
+
+  var hour = document.createElement("input");
+  var hourType = document.createAttribute("type");
+  hourType.value="number";
+  hourMax = document.createAttribute("max");
+  hourMax.value=23;
+  hourMin = document.createAttribute("min");
+  hourMin.value=0;
+  hour.setAttributeNode(hourType);
+  hour.setAttributeNode(hourMax);
+  hour.setAttributeNode(hourMin);
+  var holder = document.getElementById('hold');
+
+
+
+  var minutes = document.createElement("input");
+  var minutesType = document.createAttribute("type");
+  minutesType.value="number";
+  minutesMax = document.createAttribute("max");
+  minutesMax.value=59;
+  minutesMin = document.createAttribute("min");
+  minutesMin.value=0;
+  minutes.setAttributeNode(minutesType);
+  minutes.setAttributeNode(minutesMax);
+  minutes.setAttributeNode(minutesMin);
+
+  var seconds = document.createElement("input");
+  var secondsType = document.createAttribute("type");
+  secondsType.value="number";
+  secondsMax = document.createAttribute("max");
+  secondsMax.value=59;
+  secondsMin = document.createAttribute("min");
+  secondsMin.value=0;
+  seconds.setAttributeNode(secondsType);
+  seconds.setAttributeNode(secondsMax);
+  seconds.setAttributeNode(secondsMin);
+
+
+  var holder = document.getElementsByClassName('hold');
+  holder[index].appendChild(hour)
+  holder[index].appendChild(hourSpan)
+
+  holder[index].appendChild(minutes)
+  holder[index].appendChild(minutesSpan)
+
+  holder[index].appendChild(seconds)
+
+
+
+
 }

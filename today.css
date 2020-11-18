@@ -1,0 +1,27 @@
+body{
+  background-color: #3d475c;
+}
+
+button{
+  font-size: 18px;
+  font-family:serif;
+  border-radius: 5%;
+  background-color: #8f3d66;
+  color: white;
+  padding: 1%;
+}
+ .workTask{
+   margin-top: 5%;
+ margin-left: 1%;
+ padding: 1%;
+}
+
+ /* .remove{
+  margin-top: 5%;
+  margin-left: 7%;
+} */
+
+.settime{
+  margin-top: -10%;
+  margin-left:100%;
+}

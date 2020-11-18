@@ -1,0 +1,10 @@
+body{
+  background-color: #576675;
+}
+
+#container>a>button{
+  display: grid;
+  grid-template-columns: auto auto;
+  /* width: 100px; */
+  /* grid-template-rows: auto auto; */
+}

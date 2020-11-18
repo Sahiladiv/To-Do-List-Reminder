@@ -1,62 +1,40 @@
-
 function setdate(x){
   var index = x.parentNode.parentNode.rowIndex;
-  var dataRow = document.getElementsByClassName('hold');
-
-  // var breakline1 = document.createElement("br");
-  // // var breakline2 = document.createElement("br");
-  // var holddiv = document.getElementsByClassName("hold");
-  //
-  //   console.log(holddiv[0]);
-
-  //
-  // var template = document.getElementById('job');
+  var data = document.getElementsByClassName('hold');
+  var dataRow = document.getElementsByClassName('holdclass');
   var taskDate = document.createElement("input");
   var taskDateType = document.createAttribute("type");
   taskDateType.value = "date";
   taskDate.setAttributeNode(taskDateType)
-  dataRow[index].appendChild(taskDate);
-  var dateSet = document.getElementsByClassName('setDate');
-  dateSet[index].disabled = true
-  // template.appendChild(holddiv);
-  // holddiv.appendChild(breakline1);
-  // holddiv.appendChild(breakline2);
-
+  console.log(data[index])
+  dataRow[index].appendChild(taskDate)
+  data[index].appendChild(dataRow[index])
 }
 
-
-
-
-function addToday(){
-var template = document.getElementById('dataTable');
-
-
-
-  var dataRow = document.createElement("tr");
+function addReminder(){
+  var template = document.getElementById('dataTable');
 
   var holddiv = document.createElement("div");
+  var holderclass = document.createAttribute("class");
+  holderclass.value = "holdclass"
+  holddiv.setAttributeNode(holderclass);
+
+  var dataRow = document.createElement("tr");
   var holder = document.createAttribute("class");
   holder.value = "hold"
-  holddiv.setAttributeNode(holder);
-  dataRow.appendChild(holddiv);
 
+  dataRow.setAttributeNode(holder);
 
   var task = document.createElement("input");
   var taskType = document.createAttribute("type");
   var taskSize = document.createAttribute("size");
   var taskClass = document.createAttribute("class");
-
   taskType.value="text"
   taskSize.value="100"
   taskClass.value = "workTask"
-
   task.setAttributeNode(taskType)
   task.setAttributeNode(taskSize)
   task.setAttributeNode(taskClass)
-
-
-
-
 
   var status = document.createElement("input");
   var statusType = document.createAttribute("type");
@@ -64,15 +42,15 @@ var template = document.getElementById('dataTable');
   status.setAttributeNode(statusType);
 
 // create buttons:start
-  var doneButton = document.createElement("button");
-  var doneText = document.createTextNode("Done");
-  doneButton.appendChild(doneText);
-  var doneClass = document.createAttribute("class");
-  doneClass.value = "done";
-  doneButton.setAttributeNode(doneClass)
-  var doneClick = document.createAttribute("onclick");
-  doneClick.value = "add(this)"
-  doneButton.setAttributeNode(doneClick);
+  var   removeButton = document.createElement("button");
+  var removeText = document.createTextNode("Remove");
+  removeButton.appendChild(removeText);
+  var removeClass = document.createAttribute("class");
+  removeClass.value = "remove";
+  removeButton.setAttributeNode(removeClass)
+  var removeClick = document.createAttribute("onclick");
+  removeClick.value = "remove(this)"
+  removeButton.setAttributeNode(removeClick);
 
   var setDateButton = document.createElement("button");
   var setDateText = document.createTextNode("Set Date");
@@ -84,25 +62,17 @@ var template = document.getElementById('dataTable');
   dateClick.value = "setdate(this)"
   setDateButton.setAttributeNode(dateClick);
 
-  // console.log(doneButton)
-// create buttons:end
-
   holddiv.appendChild(status)
+  holddiv.appendChild(removeButton)
   holddiv.appendChild(task)
-  holddiv.appendChild(doneButton)
   holddiv.appendChild(setDateButton)
-
+  dataRow.appendChild(holddiv);
   template.appendChild(dataRow)
-
-
-
 
 }
 
-function add(t){
-  var index = t.parentNode.parentNode.rowIndex;
-  var doneButton = document.getElementsByClassName("done");
-  doneButton[index].disabled=true
-
-  // task[index].disabled=true
+function remove(x){
+  var index = x.parentNode.parentNode.rowIndex;
+  var data = document.getElementsByClassName('hold');
+  data[index].remove();
 }
